@@ -20,4 +20,4 @@ RUN curl -sL https://deb.nodesource.com/setup_16.x | bash - && \
 RUN pip intall -r requirements.txt
 
 # Running Video Player Bot
-CMD python -m lib
+CMD bash start.sh
