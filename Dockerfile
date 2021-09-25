@@ -1,15 +1,23 @@
-FROM python:3.9.0
+# Python Based Docker
+FROM python:latest
 
-COPY . /IU
-WORKDIR /IU
+COPY . /Worker
+WORKDIR /Worker
 
-RUN apt update -qqy \
-    && apt install --no-install-recommends git curl ffmpeg -qqy \
-    && curl -sL https://deb.nodesource.com/setup_15.x | bash - \
-    && apt-get install -y nodejs \
-    && npm i -g npm \
-    && git clone https://github.com/Imszy17/addon-telegram-vc lib/etc \
-    && pip install -U -r requirements.txt \
-    && rm -rf /var/lib/apt/lists/*
+# Installing Packages
+RUN apt update && apt upgrade -y
+RUN apt install git curl python3-pip ffmpeg -y
 
+# Updating Pip Packages
+RUN pip3 install -U pip
+
+# Installing NodeJS
+RUN curl -sL https://deb.nodesource.com/setup_16.x | bash - && \
+    apt-get install -y nodejs && \
+    npm i -g npm
+
+# requirements
+RUN pip intall -r requirements.txt
+
+# Running Video Player Bot
 CMD python -m lib
