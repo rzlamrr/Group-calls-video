@@ -1,4 +1,4 @@
-FROM debian:latest
+FROM python:3.9.0
 RUN apt update && apt upgrade -y
 RUN apt-get install wget -y
 RUN apt install git curl python3-pip ffmpeg -y
