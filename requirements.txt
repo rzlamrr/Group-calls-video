@@ -3,6 +3,7 @@ git+https://github.com/pyrogram/pyrogram@master
 pafy
 py-tgcalls==0.8.1b19
 TgCrypto
+wget
 yt-dlp
 youtube_search
 youtube_search_python
