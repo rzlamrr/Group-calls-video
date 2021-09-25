@@ -1,12 +1,15 @@
 FROM python:3.9.0
-RUN apt update && apt upgrade -y
-RUN apt-get install wget -y
-RUN apt install git curl python3-pip ffmpeg -y
-RUN curl -sL https://deb.nodesource.com/setup_15.x | bash -
-RUN apt-get install -y nodejs
-RUN npm i -g npm
-RUN pip3 install -U pip
-COPY . /dir
-WORKDIR /dir
-RUN pip install -U -r requirements.txt
-CMD python3 -m lib
+
+COPY . /IU
+WORKDIR /IU
+
+RUN apt update -qqy \
+    && apt install --no-install-recommends git curl ffmpeg -qqy \
+    && curl -sL https://deb.nodesource.com/setup_15.x | bash - \
+    && apt-get install -y nodejs \
+    && npm i -g npm \
+    && git clone https://github.com/Imszy17/addon-telegram-vc lib/etc \
+    && pip install -U -r requirements.txt \
+    && rm -rf /var/lib/apt/lists/*
+
+CMD python -m lib
