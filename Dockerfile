@@ -1,5 +1,5 @@
 # Python Based Docker
-FROM python:latest
+FROM node:16
 
 COPY . /Worker
 WORKDIR /Worker
